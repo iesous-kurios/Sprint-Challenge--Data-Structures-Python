@@ -36,10 +36,42 @@ Pre-optimized code:
   Run-time: 4.928653 seconds
 
 Optimized code using a binary search tree:
-  Run-time: 0.05270957946777344 seconds"""
+  Time complexity: 
+  
+  Searching: worst case complexity of O(n).
+  Insertion: worst case complexity of O(n). 
+  Deletion:  worst case complexity of O(n). 
 
+  Run-time: 0.05270957946777344 seconds
+  """
+  
 
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem
 # What's the best time you can accomplish?  Thare are no restrictions on techniques or data
 # structures, but you may not import any additional libraries that you did not write yourself.
+
+"""
+Optimized code using Python's built-in 'set' data structure (see code below):
+  Time complexity: O(n)
+  Run-time: 0.0020346641540527344 seconds"""
+
+start_time = time.time()
+
+f = open('names_1.txt', 'r')
+names_1 = f.read().split("\n")  # List containing 10000 names
+f.close()
+
+f = open('names_2.txt', 'r')
+names_2 = f.read().split("\n")  # List containing 10000 names
+f.close()
+
+duplicates = []  # Return the list of duplicates in this data structure
+
+# Replace the nested for loops with python's "set"
+# and store duplicates as lists for stretch goal perameters. 
+duplicates = list(set(names_1) & set(names_2))
+
+end_time = time.time()
+print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+print (f"runtime: {end_time - start_time} seconds")
