@@ -75,3 +75,35 @@ duplicates = list(set(names_1) & set(names_2))
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 print (f"runtime: {end_time - start_time} seconds")
+
+# just for fun, checking out how I would do it with pandas:
+
+start_time = time.time()
+
+import pandas as pd 
+
+header_list = ["Name"]
+
+#  create pandas dataframe loaded with names on first text file
+
+names_1_df = pd.read_csv("names_1.txt", names=header_list)
+
+
+#  create pandas dataframe loaded with names on second text file
+names_2_df = pd.read_csv("names_2.txt", names=header_list)
+
+#  create new dataframe that contains names from 2nd which are found in 1st
+duplicates_df = names_2_df[names_2_df['Name'].isin(names_1_df['Name'])]
+
+dup_list = duplicates_df['Name']
+
+#  print the list of duplicates
+print('Just for fun, duplicates using pandas')
+
+print('Using pandas took this long:')
+
+end_time = time.time()
+print (f"{len(dup_list)} duplicates:\n\n{', '.join(dup_list)}\n\n")
+print (f"runtime: {end_time - start_time} seconds")
+
+# using pandas is a LOT slower than my BST or python's built in set and list functions. 
